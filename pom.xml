@@ -23,9 +23,17 @@
     <dependencies>
 
         <!--        обязательно если хочу чтобы работал веб -->
+        <!--        Все стартеры в Spring Boot основаны на spring-boot-starter-logging.
+                    Использование по умолчанию Logback, С Log4j2 нужно исключить spring-boot-starter-logging-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--    без этой зависимости flyway не будет вызываться -->
@@ -61,7 +69,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Add Log4j2 Dependency -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
     </dependencies>
+
 
     <build>
         <plugins>
