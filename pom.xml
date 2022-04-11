@@ -22,35 +22,43 @@
 
     <dependencies>
 
-<!--        обязательно если хочу чтобы работал веб -->
+        <!--        обязательно если хочу чтобы работал веб -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-<!--    без этой зависимости flyway не будет вызываться -->
+        <!--    без этой зависимости flyway не будет вызываться -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-<!--        а без неё нету смысла вообще flyway дёргать -->
+        <!--        а без неё нету смысла вообще flyway дёргать -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
 
-<!--        тут всё понятно)) без неё mysql не будет работать -->
+        <!--        тут всё понятно)) без неё mysql не будет работать -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-<!--        перезапуск приложения происходит намного быстрее -->
+        <!--        перезапуск приложения происходит намного быстрее -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>

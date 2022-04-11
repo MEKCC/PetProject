@@ -13,7 +13,7 @@ CREATE TABLE user
 CREATE TABLE role
 (
     id   bigint(20)  NOT NULL,
-    name varchar(40) NOT NULL,
+    role_name varchar(15) NOT NULL,
     PRIMARY KEY (id)
 );
 
