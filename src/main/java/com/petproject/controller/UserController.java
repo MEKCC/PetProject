@@ -25,4 +25,10 @@ public class UserController {
         log.info("@@@ <--- !!! SOME INFO !!! ---> @@@");
         return userService.getAllUsers();
     }
+
+    @GetMapping("/cached-user")
+    public User findStudentById() {
+        log.info("Searching by ID: ");
+        return userService.getUserById();
+    }
 }

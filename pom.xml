@@ -18,6 +18,9 @@
 
     <properties>
         <java.version>11</java.version>
+        <lombok.version>1.18.22</lombok.version>
+        <starter.cache.version>2.6.6</starter.cache.version>
+        <caffeine.version>3.0.6</caffeine.version>
     </properties>
 
     <dependencies>
@@ -65,7 +68,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -73,6 +76,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+            <version>${starter.cache.version}</version>
+        </dependency>
+
+        <!--        надо для того чтобы управлять кешами, например легко настроить время жизни кеша -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>${caffeine.version}</version>
         </dependency>
 
     </dependencies>
