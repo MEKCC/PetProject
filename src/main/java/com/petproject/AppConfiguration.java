@@ -12,6 +12,7 @@ import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -50,5 +51,10 @@ public class AppConfiguration {
         }
         C2FLogger.initAppConfig("PricingApi", level, handlers.toArray(new ILogHandler[]{}));
         return new C2FLogger();
+    }
+
+    @Bean
+    public Clock clock() {
+        return Clock.systemUTC();
     }
 }

@@ -1,7 +1,6 @@
 package com.petproject.service;
 
 import com.petproject.logger.C2FLogger;
-import com.petproject.model.Role;
 import com.petproject.model.User;
 import com.petproject.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import static java.lang.Thread.sleep;
 @Service
 public class UserService {
 
-    private static final Integer MILLISECONDS_TO_SLEEP = 5000;
+    private static final Integer MILLISECONDS_TO_SLEEP = 2000;
     private final C2FLogger log = new C2FLogger();
 
     @Autowired
@@ -40,10 +39,6 @@ public class UserService {
             .setId(3L)
             .setUsername("cached name")
             .setEmail("cached email")
-            .setPassword("cached password")
-            .setRoles(List.of(
-                new Role().setId(1L).setRoleName("ADMIN"),
-                new Role().setId(2L).setRoleName("USER")
-            ));
+            .setPassword("cached password");
     }
 }
