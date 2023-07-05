@@ -9,14 +9,21 @@ kind create cluster --config kind-config.yaml
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 kubectl apply -f k8s/ingress.yaml
-# посмотреть поды
+#kubectl apply -f k8s/loadbalancer.yaml
+# посмотреть поды и их хешкод
 kubectl get pods
 kubectl get pods --watch
 # посмотреть логи к поду (указать хеш пода)
-kubectl logs hashcode
+kubectl logs petproject-59dbc84b48-qxqw4
 kubectl delete pods --all
 kubectl delete deployments --all
+kind delete cluster --name kind
 # petproject-59dbc84b48-78xdv заменить на корректный хеш
 # два порта, слева тот на который мы обращаемя, справа тот на котором работает наше java app внутри пода
-kubectl port-forward petproject-59dbc84b48-78xdv 8899:8888
+kubectl port-forward petproject-79d7f8d584-kbw7f 8899:8888
 kubectl get service
+kubectl describe pod petproject-55cb4cbcb7-w7k89
+kubectl get ingress
+kubectl get services --all-namespaces
+kubectl get services -n default
+kubectl exec -it petproject-59dbc84b48-qxqw4 -- /bin/bash
