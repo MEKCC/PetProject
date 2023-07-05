@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petproject
+  labels:
+    app: petproject
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: petproject
+  template:
+    metadata:
+      labels:
+        app: petproject
+    spec:
+      containers:
+        - name: petproject
+          image: mekcc/petproject:0.0.1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATASOURCE_HOST
+              value: 192.168.0.108
+            - name: spring.mvc.servlet.path
+              value: /petproject
