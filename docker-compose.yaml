@@ -9,19 +9,24 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
       MYSQL_DATABASE: testDB
-#    volumes:
-#      - ./data:/var/lib/mysql
+    volumes:
+      - db_data:/var/lib/mysql
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672" # порт для AMQP протокола
+      - "15672:15672" # порт для веб-интерфейса RabbitMQ
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest # логин по умолчанию
+      - RABBITMQ_DEFAULT_PASS=guest # пароль по умолчанию
     restart: always
-#  spring-boot-app:
-#    image: spring-boot-app:test
-#    ports:
-#      - "8080:8080"
-#    environment:
-#      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/testDB?autoReconnect=true&useSSL=false
-#      SPRING_DATASOURCE_USERNAME: root
-#      SPRING_DATASOURCE_PASSWORD: root
-#    build:
-#      context: "./"
-#      dockerfile: "Dockerfile"
-#    depends_on:
-#      - db
+
+volumes:
+  rabbitmq_data:
+    driver: local
+  db_data:
+    driver: local
