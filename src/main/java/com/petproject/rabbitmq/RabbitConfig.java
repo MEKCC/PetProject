@@ -35,17 +35,16 @@ public class RabbitConfig {
 
     @Bean
     public Queue myQueue() {
-        return new Queue("queue");
+        return new Queue("queue-mp");
     }
 
     @Bean
     DirectExchange exchange() {
-        return new DirectExchange("testExchange", true, false);
+        return new DirectExchange("testExchange-mp", true, false);
     }
 
     @Bean
     Binding binding(Queue queue, DirectExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("testRoutingKey");
+        return BindingBuilder.bind(queue).to(exchange).with("testRoutingKey-mp");
     }
-
 }

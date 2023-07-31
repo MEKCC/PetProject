@@ -15,7 +15,6 @@ public class RabbitMQProducerServiceImpl implements RabbitMQProducerService {
     }
 
     public void sendMessage(String message, String routingKey) {
-        rabbitTemplate.convertAndSend("testExchange", routingKey, message);
+        rabbitTemplate.convertAndSend("testExchange-mp", routingKey, message);
     }
-
 }

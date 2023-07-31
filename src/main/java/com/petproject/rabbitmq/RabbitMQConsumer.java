@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 public class RabbitMQConsumer {
 
 
-    @RabbitListener(queues = "queue1")
+    @RabbitListener(queues = "queue-mp")
     public void processMyQueue(String message) {
-        System.out.printf("Received from myQueue : %s ", new String(message.getBytes()));
+        System.out.printf("Received from queue-mp : %s ", new String(message.getBytes()));
     }
 }
