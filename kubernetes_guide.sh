@@ -27,3 +27,11 @@ kubectl get ingress
 kubectl get services --all-namespaces
 kubectl get services -n default
 kubectl exec -it petproject-59dbc84b48-qxqw4 -- /bin/bash
+
+
+# ********************************************* kafka *********************************
+Войдите в Docker-контейнер с Kafka с помощью команды:
+docker exec -it petproject-kafka-1 bash
+
+Внутри контейнера выполните команду для получения списка всех топиков:
+/usr/bin/kafka-topics --list --bootstrap-server petproject-kafka-1:9092
