@@ -6,9 +6,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaListenerExample {
 
-    @KafkaListener(topics = "test-topic", groupId = "myGroup")
-    public void listen(String message) {
-        System.out.println("Received message: " + message);
+    @KafkaListener(topics = "demo_topic", groupId = "myGroup")
+    void listener(final Message data) {
+        System.out.println(data);
     }
 }
-
