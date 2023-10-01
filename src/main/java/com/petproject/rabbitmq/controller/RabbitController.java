@@ -15,6 +15,14 @@ public class RabbitController {
 
     @GetMapping("/send")
     public void sendMessageToRabbit() {
-        rabbitMQProducerService.sendMessage(userRepository.findAllUsers(), "september-key");
+        try {
+            rabbitMQProducerService.sendMessage(userRepository.findAllUsers(), "september-key");
+
+            // Генеруємо приклад помилки
+            throw new RuntimeException("some error");
+
+        } catch (Exception e) {
+            rabbitMQProducerService.sendMessage(e.getMessage(), "error-key");
+        }
     }
 }

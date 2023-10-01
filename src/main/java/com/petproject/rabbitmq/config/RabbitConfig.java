@@ -13,6 +13,11 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitConfig {
 
     @Bean
+    public Queue errorQueue() {
+        return new Queue("error-queue");
+    }
+
+    @Bean
     public Queue myQueue() {
         return new Queue("september-queue");
     }
@@ -28,6 +33,15 @@ public class RabbitConfig {
             .bind(myQueue())
             .to(exchange())
             .with("september-key")
+            .noargs();
+    }
+
+    @Bean
+    public Binding anotherBinding() {
+        return BindingBuilder
+            .bind(errorQueue())
+            .to(exchange())
+            .with("error-key")
             .noargs();
     }
 }

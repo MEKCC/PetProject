@@ -1,28 +1,23 @@
 package com.petproject.rabbitmq.consumer;
 
-import com.petproject.model.User;
 import org.springframework.amqp.core.ExchangeTypes;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-@EnableRabbit
-public class RabbitMQConsumer {
+public class ErrorQueueConsumer {
 
     @RabbitListener(bindings = @QueueBinding(
-        value = @Queue(value = "september-queue", durable = "true"),
+        value = @Queue(value = "error-queue", durable = "true"),
         exchange = @Exchange(value = "september", type = ExchangeTypes.TOPIC),
-        key = "september-key"
+        key = "error-key"
     ))
-    public void processMyQueue(final List<User> users) {
+    public void processErrorQueueMessage(String message) {
         System.out.println();
-        System.out.printf("Received from september-queue : %s ", users);
+        System.out.println("Received from error-queue: " + message);
         System.out.println();
     }
 }

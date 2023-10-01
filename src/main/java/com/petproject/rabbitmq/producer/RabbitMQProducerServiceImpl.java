@@ -16,4 +16,8 @@ public class RabbitMQProducerServiceImpl implements RabbitMQProducerService {
     public void sendMessage(final List<UserDto> users, final String routingKey) {
         rabbitTemplate.convertAndSend("september", routingKey, users);
     }
+
+    public void sendMessage(String errorMessage, String routingKey) {
+        rabbitTemplate.convertAndSend("september", routingKey, errorMessage);
+    }
 }
