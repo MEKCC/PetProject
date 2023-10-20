@@ -244,6 +244,13 @@
             <artifactId>micrometer-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>4.0.3</version> <!-- Версію слід вказати відповідно до вашого проекту -->
+        </dependency>
+
+
     </dependencies>
 
     <packaging>jar</packaging>
