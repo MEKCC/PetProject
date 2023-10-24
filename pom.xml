@@ -250,6 +250,10 @@
             <version>4.0.3</version> <!-- Версію слід вказати відповідно до вашого проекту -->
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
 
     </dependencies>
 

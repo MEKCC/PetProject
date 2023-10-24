@@ -58,22 +58,42 @@ services:
     networks:
       - my-pet-project-network
     volumes:
-    - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    - ./prometheus:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus:/prometheus
     ports:
-    - "19090:9090"
+      - "19090:9090"
 
   grafana:
     build: './scripts/config/grafana'
     networks:
       - my-pet-project-network
     ports:
-    - "13000:3000"
+      - "13000:3000"
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_AMIND_PASSWORD=admin
     volumes:
-    - grafana-data:/var/lib/grafana
+      - grafana-data:/var/lib/grafana
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+    networks:
+      - my-pet-project-network
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.2
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    networks:
+      - my-pet-project-network
 
 volumes:
   rabbitmq_data:
@@ -81,6 +101,8 @@ volumes:
   db_data:
     driver: local
   grafana-data:
+  elasticsearch-data:
+    driver: local
 
 networks:
   my-pet-project-network:
