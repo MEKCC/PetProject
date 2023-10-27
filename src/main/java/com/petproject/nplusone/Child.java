@@ -16,7 +16,6 @@ import javax.persistence.Table;
 @Entity
 @Data
 @Table(name = "child")
-@BatchSize(size = 1)
 public class Child {
 
     @Id

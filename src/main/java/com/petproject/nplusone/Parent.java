@@ -17,7 +17,6 @@ import java.util.List;
 @Data
 @ToString(exclude = "children")
 @Table(name = "parent")
-@BatchSize(size = 1)
 public class Parent {
 
     @Id
