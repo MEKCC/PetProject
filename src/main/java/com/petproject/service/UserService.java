@@ -1,5 +1,7 @@
 package com.petproject.service;
 
+import com.petproject.common.model.NotFoundException;
+import com.petproject.common.model.UserException;
 import com.petproject.logger.C2FLogger;
 import com.petproject.model.User;
 import com.petproject.repo.UserRepository;
@@ -7,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 import static java.lang.String.format;
 import static java.lang.Thread.sleep;
@@ -40,5 +44,23 @@ public class UserService {
             .setUsername("cached name")
             .setEmail("cached email")
             .setPassword("cached password");
+    }
+
+    public User getNonExistUser() {
+        final Optional<User> optionalUser = userRepository.findById(999999L);
+        if (optionalUser.isEmpty()) {
+            throw new UserException("user not exist");
+        } else {
+            return optionalUser.get();
+        }
+    }
+
+    public User getNonExistUserVoidResponse() {
+        final Optional<User> optionalUser = userRepository.findById(999999L);
+        if (optionalUser.isEmpty()) {
+            throw new NotFoundException();
+        } else {
+            return optionalUser.get();
+        }
     }
 }

@@ -27,4 +27,14 @@ public class UserController {
     public User findStudentById() {
         return userService.getUserById();
     }
+
+    @GetMapping("/user-exception")
+    public User getNonExistentUser() {
+        return userService.getNonExistUser();
+    }
+
+    @GetMapping("/user-exception-void")
+    public User getNonExistUserVoidResponse() {
+        return userService.getNonExistUserVoidResponse();
+    }
 }
