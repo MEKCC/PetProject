@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS parent (
+    id INT AUTO_INCREMENT PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS child (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    parent_id INT,
+    FOREIGN KEY (parent_id) REFERENCES parent(id)
+);

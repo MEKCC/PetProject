@@ -1,6 +1,6 @@
 package com.petproject.rabbitmq.consumer;
 
-import com.petproject.model.User;
+import com.petproject.user.User;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.Exchange;
@@ -20,9 +20,9 @@ public class RabbitMQConsumer {
         exchange = @Exchange(value = "september", type = ExchangeTypes.TOPIC),
         key = "september-key"
     ))
-    public void processMyQueue(final List<User> users) {
+    public void processMyQueue(final List<User> myUsers) {
         System.out.println();
-        System.out.printf("Received from september-queue : %s ", users);
+        System.out.printf("Received from september-queue : %s ", myUsers);
         System.out.println();
     }
 }

@@ -1,11 +1,16 @@
 package com.petproject.rabbitmq.controller;
 
+import com.petproject.rabbitmq.model.UserDto;
 import com.petproject.rabbitmq.producer.RabbitMQProducerService;
-import com.petproject.repo.UserRepository;
+import com.petproject.user.UserRepository;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
+
+import static java.util.Collections.singletonList;
 
 @RestController
 @AllArgsConstructor
@@ -24,7 +29,7 @@ public class RabbitController {
             // Збільшуйте лічильник для кожного HTTP-запиту
             httpRequestsCounter.increment();
 
-            rabbitMQProducerService.sendMessage(userRepository.findAllUsers(), "september-key");
+            rabbitMQProducerService.sendMessage(singletonList(new UserDto("rabbitmqName", "rabbitmqEmail")), "september-key");
 
             // Генеруємо приклад помилки
             throw new RuntimeException("some error");
