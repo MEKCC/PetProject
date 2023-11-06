@@ -1,4 +1,4 @@
-package com.petproject.common.model;
+package com.petproject.common.exception;
 
 import lombok.NoArgsConstructor;
 

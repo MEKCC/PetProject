@@ -1,17 +1,17 @@
 package com.petproject.common.api;
 
+import com.petproject.common.exception.NotFoundException;
+import com.petproject.common.exception.RegistrationException;
+import com.petproject.common.exception.UserException;
 import com.petproject.common.logging.LogResponseBody;
-import com.petproject.common.model.NotFoundException;
-import com.petproject.common.model.UserException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice("com.petproject.controller")
+@RestControllerAdvice("com.petproject")
 public class CommonExceptionHandler {
-
     @LogResponseBody
     @ExceptionHandler(UserException.class)
     @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
@@ -28,5 +28,12 @@ public class CommonExceptionHandler {
         } else {
             return ResponseEntity.notFound().header("Message", exceptionMessage).build();
         }
+    }
+
+    @LogResponseBody
+    @ExceptionHandler(RegistrationException.class)
+    @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ResponseEntity<String> handleRegistrationException(final RegistrationException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
     }
 }

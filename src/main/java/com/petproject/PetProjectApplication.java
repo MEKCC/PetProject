@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import static com.petproject.user.Role.ADMIN;
-import static com.petproject.user.Role.MANAGER;
 
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
@@ -31,16 +30,7 @@ public class PetProjectApplication {
                 .password("password")
                 .role(ADMIN)
                 .build();
-            System.out.println("Admin token: " + service.register(admin).getAccessToken());
-
-            var manager = RegisterRequest.builder()
-                .firstname("Admin")
-                .lastname("Admin")
-                .email("manager@mail.com")
-                .password("password")
-                .role(MANAGER)
-                .build();
-            System.out.println("Manager token: " + service.register(manager).getAccessToken());
+            service.registerAdmin(admin);
 
         };
     }

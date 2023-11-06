@@ -1,6 +1,8 @@
 package com.petproject.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.petproject.common.exception.RegistrationException;
+import com.petproject.common.exception.UserException;
 import com.petproject.security.JwtService;
 import com.petproject.token.Token;
 import com.petproject.token.TokenRepository;
@@ -11,12 +13,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +32,11 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request) {
+    public ResponseEntity<AuthenticationResponse> register(RegisterRequest request) {
+        final Optional<User> existingUser = repository.findByEmail(request.getEmail());
+        if (existingUser.isPresent()) {
+            throw new RegistrationException("User with current email already exists");
+        }
         var user = User.builder()
             .firstname(request.getFirstname())
             .lastname(request.getLastname())
@@ -39,10 +48,26 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
-        return AuthenticationResponse.builder()
+        return ResponseEntity.ok(AuthenticationResponse.builder()
             .accessToken(jwtToken)
             .refreshToken(refreshToken)
-            .build();
+            .build());
+    }
+
+    public void registerAdmin(RegisterRequest request) {
+        final Optional<User> existingUser = repository.findByEmail(request.getEmail());
+        if (existingUser.isEmpty()) {
+            var user = User.builder()
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(request.getRole())
+                .build();
+            var savedUser = repository.save(user);
+            var jwtToken = jwtService.generateToken(user);
+            saveUserToken(savedUser, jwtToken);
+        }
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
