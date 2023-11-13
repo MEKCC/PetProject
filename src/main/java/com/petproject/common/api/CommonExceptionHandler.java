@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class CommonExceptionHandler {
     @LogResponseBody
     @ExceptionHandler(UserException.class)
-    @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
     public ResponseEntity<String> handleNniImportException(final UserException exception) {
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(NotFoundException.class)
@@ -32,8 +31,7 @@ public class CommonExceptionHandler {
 
     @LogResponseBody
     @ExceptionHandler(RegistrationException.class)
-    @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
     public ResponseEntity<String> handleRegistrationException(final RegistrationException exception) {
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }

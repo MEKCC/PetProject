@@ -13,6 +13,6 @@ public interface TestRepo extends JpaRepository<Parent, Integer> {
     @Query("SELECT DISTINCT p FROM Parent p JOIN FETCH p.children")
     List<Parent> getParentsWithoutN1();
 
-    @EntityGraph(attributePaths = {"children"})
+//    @EntityGraph(attributePaths = {"children"})
     List<Parent> findAll();
 }
