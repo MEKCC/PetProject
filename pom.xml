@@ -282,6 +282,12 @@
             <version>3.1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.7.1</version> <!-- Останній випущений реліз на момент написання. -->
+        </dependency>
+
     </dependencies>
 
     <packaging>jar</packaging>
