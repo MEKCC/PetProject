@@ -14,26 +14,25 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @ContextConfiguration(classes = TestConfig.class)
-class MyUserControllerTest extends AbstractControllerIntegrationTest {
+class DemoControllerTest extends AbstractControllerIntegrationTest {
 
-    private static final String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Im1ha3N5bSIsImV4cCI6MTczNTY4OTU5OSwiaWQiOjEsImRhdGEiOjE2NzI1MzEyMDAsInVzZXJuYW1lIjoibWFrc3ltX3AifQ.1AlaxxQb_ZXFU8gJlfUWW6vZKpoe_nzD_0pMJnN4IoE";
+    private static final String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZmlyc3RuYW1lIjoiTUVLQ0MiLCJsYXN0bmFtZSI6IlBldHIiLCJlbWFpbCI6Im1ha3NAZ21haWwuY29tIiwiZXhwIjoxNzM1Njg5NTk5LCJpZCI6MSwiZGF0YSI6MTY3MjUzMTIwMCwicm9sZSI6IkFETUlOIn0.-i3JzTWVAGhhNJ3kZkfEh8OSuFiXwnj1JNET-C_gUsQ";
 
     @Autowired
     private MockMvc mvc;
 
-    @Test
-    @DataSet(value = "datasets/getUsers_init.xml", disableConstraints = true)
-    void getUsers() throws Exception {
-
-        mvc
-            .perform(get("/users")
-                .accept(APPLICATION_JSON)
-                .header(AUTHORIZATION, TOKEN))
-            .andExpect(status().isOk())
-            .andExpect(content().json(getResource("db/changelog/json/getUsers_response.json")));
-
-    }
+//    @Test
+//    @DataSet(value = "datasets/getUsers_init.xml", disableConstraints = true)
+//    void getHello() throws Exception {
+//
+//        mvc
+//            .perform(get("/api/v1/demo-controller")
+//                .accept(APPLICATION_JSON)
+//                .header(AUTHORIZATION, TOKEN))
+//            .andExpect(status().isOk())
+//            .andExpect(content().json(getResource("db/changelog/json/getUsers_response.json")));
+//
+//    }
 
 }

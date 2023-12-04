@@ -1,43 +1,44 @@
 -- auto-generated definition
 create table testDB.user
 (
-    id                   bigint auto_increment primary key,
-    username             varchar(360) charset utf8 null,
-    password             varchar(360) charset utf8 null,
-    email                varchar(45) charset utf8  null unique,
-    firstname            varchar(45) charset utf8  null,
-    lastname             varchar(45) charset utf8  null,
-    role_id              int        default 2      not null,
-    createddate          datetime                  null,
-    createdby            int unsigned              null,
-    modifieddate         datetime                  null,
-    modifiedby           int unsigned              null,
-    password_reset_token varchar(765) charset utf8 null
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(255),
+    lastname VARCHAR(255),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255),
+    role ENUM('USER', 'ADMIN', 'MANAGER') NOT NULL
 )
     charset = utf8mb4;
 
-create index fk_created_ky_idx
-    on user (createdby);
+INSERT INTO testDB.user (firstname, lastname, email, password, role)
+VALUES ('MEKCC', 'Petr', 'maks@gmail.com', '12345678', 'ADMIN');
 
-create index fk_modified_by_idx
-    on user (modifiedby);
+CREATE TABLE IF NOT EXISTS book (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    author VARCHAR(255),
+    isbn VARCHAR(255),
+    create_date DATETIME NOT NULL,
+    last_modified DATETIME,
+    created_by INT NOT NULL,
+    last_modified_by INT
+);
 
--- auto-generated definition
-create table testDB.roles
-(
-    id                int auto_increment
-        primary key,
-    rolename          varchar(50) charset utf8  null,
-    role_display_name varchar(100) charset utf8 null,
-    `order`           int(5)                    null
-)
-    charset = utf8mb4;
+CREATE TABLE IF NOT EXISTS parent (
+    id INT AUTO_INCREMENT PRIMARY KEY
+);
 
-ALTER TABLE testDB.user
-    ADD COLUMN is_active tinyint(1) default 1                 null;
+CREATE TABLE IF NOT EXISTS child (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    parent_id INT,
+    FOREIGN KEY (parent_id) REFERENCES parent(id)
+);
 
-INSERT INTO testDB.user (username, password, email, firstname, lastname, role_id, is_active)
-VALUES ('MEKCC', 12345678, 'maks@gmail.com', 'Maksym', 'Surname', 1, 1);
-
-INSERT INTO testDB.roles (rolename, role_display_name, `order`)
-VALUES ('Administrator', 'Administrator', 1);
+CREATE TABLE IF NOT EXISTS token (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) UNIQUE NOT NULL,
+    token_type ENUM('BEARER') NOT NULL,
+    revoked TINYINT(1) NOT NULL,
+    expired TINYINT(1) NOT NULL,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES user(id)
+);
