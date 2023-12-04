@@ -3,11 +3,11 @@ name: My GitHub Action
 on:
   push:
     branches:
-      - main
+      - master
       - uat
   pull_request:
     branches:
-      - main
+      - master
       - uat
 
 jobs:
