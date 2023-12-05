@@ -26,10 +26,6 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Clear Maven cache
-        run: |
-          rm -rf ~/.m2/repository
-
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
@@ -38,6 +34,10 @@ jobs:
 
       - name: Set up Docker
         uses: docker/setup-buildx-action@v1
+
+      - name: Debug Docker Build
+        run: |
+          ls -R /var/lib/docker/tmp/buildkit-mount2327557919
 
       - name: Build and push Docker image
         env:
