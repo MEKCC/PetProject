@@ -33,7 +33,7 @@ jobs:
       - name: Build and Push Docker image
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
-          image: mekcc/PetProject
+          image: mekcc/petproject
           tags: latest
           registry: docker.io
           dockerfile: Dockerfile
