@@ -1,5 +1,5 @@
 FROM openjdk:17-jdk
 
-COPY target/PetProject-0.0.1-SNAPSHOT.jar /PetProject.jar
+COPY target/pet-project-0.0.1-SNAPSHOT.jar /pet-project.jar
 
-CMD ["java" , "-jar", "/PetProject.jar"]
+CMD ["java" , "-jar", "/pet-project.jar"]

@@ -325,7 +325,7 @@
                             <Built-By>My Name</Built-By>
                         </manifestEntries>
                     </archive>
-                    <finalName>PetProject</finalName>
+                    <finalName>pet-project</finalName>
                 </configuration>
             </plugin>
         </plugins>
