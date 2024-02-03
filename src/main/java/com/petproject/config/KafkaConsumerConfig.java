@@ -1,5 +1,6 @@
-package com.petproject.kafka;
+package com.petproject.config;
 
+import com.petproject.kafka.Message;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;

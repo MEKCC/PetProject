@@ -1,4 +1,4 @@
-package com.petproject.security;
+package com.petproject.config;
 
 import com.petproject.auditing.ApplicationAuditAware;
 import com.petproject.user.UserRepository;

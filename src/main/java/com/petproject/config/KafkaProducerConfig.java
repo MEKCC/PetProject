@@ -1,5 +1,6 @@
-package com.petproject.kafka;
+package com.petproject.config;
 
+import com.petproject.kafka.Message;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

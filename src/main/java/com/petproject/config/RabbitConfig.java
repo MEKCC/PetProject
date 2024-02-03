@@ -1,4 +1,4 @@
-package com.petproject.rabbitmq.config;
+package com.petproject.config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
