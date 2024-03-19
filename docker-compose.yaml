@@ -97,6 +97,21 @@ services:
     networks:
       - my-pet-project-network
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.1
+    container_name: my-keycloak
+    restart: always
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+    command: [ "start-dev" ]
+    volumes:
+      - keycloak_data:/opt/jboss/keycloak/standalone/data
+    networks:
+      - my-pet-project-network
+
 volumes:
   rabbitmq_data:
     driver: local
@@ -104,6 +119,8 @@ volumes:
     driver: local
   grafana-data:
   elasticsearch-data:
+    driver: local
+  keycloak_data:
     driver: local
 
 networks:
